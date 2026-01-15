@@ -18,8 +18,9 @@ export class Book {
   private status: LoanStatus = "available";
   private borrowedBy: string | null = null;
 
-  constructor(init: BookInit);
+  // ВАЖЛИВО: останній overload — ОБ'ЄКТ (щоб тести типізувались правильно)
   constructor(id: BookId, title: string, author: string, year: number, genre: Genre);
+  constructor(init: BookInit);
 
   constructor(
     initOrId: BookInit | BookId,
@@ -65,9 +66,7 @@ export class Book {
 
   public getInfo(): string {
     const base = `${this.title} – ${this.author} (${this.year}), ${this.genre}`;
-    if (this.status === "available") {
-      return `${base} [Available]`;
-    }
+    if (this.status === "available") return `${base} [Available]`;
     return `${base} [Borrowed by ${this.borrowedBy}]`;
   }
 }
