@@ -1,0 +1,23 @@
+{
+  "name": "ts-fundamentals-hw-1",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm-run-all --parallel typecheck:watch test:watch",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:watch": "tsc -p tsconfig.json --noEmit --watch",
+    "test:all": "npm run typecheck && npm run test"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.2.4",
+    "npm-run-all": "^4.1.5",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
+  }
+}
