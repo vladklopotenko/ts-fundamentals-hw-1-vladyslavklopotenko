@@ -1,5 +1,13 @@
 import type { BookId, Genre, LoanStatus } from "./types";
 
+type BookInit = {
+  id: BookId;
+  title: string;
+  author: string;
+  year: number;
+  genre: Genre;
+};
+
 export class Book {
   public id: BookId;
   public title: string;
@@ -10,12 +18,30 @@ export class Book {
   private status: LoanStatus = "available";
   private borrowedBy: string | null = null;
 
-  constructor(id: BookId, title: string, author: string, year: number, genre: Genre) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.year = year;
-    this.genre = genre;
+  // overloads
+  constructor(init: BookInit);
+  constructor(id: BookId, title: string, author: string, year: number, genre: Genre);
+
+  constructor(
+    a: BookInit | BookId,
+    title?: string,
+    author?: string,
+    year?: number,
+    genre?: Genre
+  ) {
+    if (typeof a === "object") {
+      this.id = a.id;
+      this.title = a.title;
+      this.author = a.author;
+      this.year = a.year;
+      this.genre = a.genre;
+    } else {
+      this.id = a;
+      this.title = title as string;
+      this.author = author as string;
+      this.year = year as number;
+      this.genre = genre as Genre;
+    }
   }
 
   public getStatus(): LoanStatus {
