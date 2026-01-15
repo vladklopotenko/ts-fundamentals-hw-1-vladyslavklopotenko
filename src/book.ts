@@ -18,29 +18,28 @@ export class Book {
   private status: LoanStatus = "available";
   private borrowedBy: string | null = null;
 
-  // overloads
   constructor(init: BookInit);
   constructor(id: BookId, title: string, author: string, year: number, genre: Genre);
 
   constructor(
-    a: BookInit | BookId,
+    initOrId: BookInit | BookId,
     title?: string,
     author?: string,
     year?: number,
     genre?: Genre
   ) {
-    if (typeof a === "object") {
-      this.id = a.id;
-      this.title = a.title;
-      this.author = a.author;
-      this.year = a.year;
-      this.genre = a.genre;
-    } else {
-      this.id = a;
+    if (typeof initOrId === "string") {
+      this.id = initOrId;
       this.title = title as string;
       this.author = author as string;
       this.year = year as number;
       this.genre = genre as Genre;
+    } else {
+      this.id = initOrId.id;
+      this.title = initOrId.title;
+      this.author = initOrId.author;
+      this.year = initOrId.year;
+      this.genre = initOrId.genre;
     }
   }
 
@@ -66,7 +65,9 @@ export class Book {
 
   public getInfo(): string {
     const base = `${this.title} – ${this.author} (${this.year}), ${this.genre}`;
-    if (this.status === "available") return `${base} [Available]`;
+    if (this.status === "available") {
+      return `${base} [Available]`;
+    }
     return `${base} [Borrowed by ${this.borrowedBy}]`;
   }
 }
