@@ -65,7 +65,7 @@ export class Book {
   }
 
   public getInfo(): string {
-    const base = `${this.title} – ${this.author} (${this.year}), ${this.genre}`;
+    const base = `${this.title} — ${this.author} (${this.year}), ${this.genre}`;
     if (this.status === "available") return `${base} [Available]`;
     return `${base} [Borrowed by ${this.borrowedBy}]`;
   }
